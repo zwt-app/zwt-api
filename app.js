@@ -79,7 +79,7 @@ const hostname = '127.0.0.1';
 //     console.log(`Server running at http://${hostname}:9443/`);
 // }).listen(9443);
 
-var PORT = 9080;
+var PORT = process.env.PORT || 9080;
  
 app.listen(PORT, function(err){
     if (err) console.log("Error in server setup")
