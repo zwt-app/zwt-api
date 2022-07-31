@@ -4,100 +4,31 @@ const request = require('request');
 
 var express = require('express');
 var app = express();
+const cors = require('cors');
 
-const hostname = '127.0.0.1';
 
-var horarios = [
-    {
-        mavio: "NAVIO A",
-        dtHrChegadaDuv: "2022-07-31 12:00:00",
-        dtHrChegadaPratico: "2022-07-31 12:00:00",
-        dtHrChegada: "2022-07-31 12:00:00", // FINAL
-        tmpHorarioAdicionalPratico: 0,
-        tamanhoNavio: undefined,
-        mare: undefined,
-        calado: undefined,
-        tempoAdicional: 0,
-        statusDesatracamento: true,
-        tempoAtracacao: 3,
-        dtHrMarineTraffic: undefined,
-        berco: "BACIA A"
-    },
-    {
-        mavio: "NAVIO B",
-        dtHrChegadaDuv: "2022-07-31 12:00:00",
-        dtHrChegadaPratico: "2022-07-31 12:00:00",
-        dtHrChegada: "2022-07-31 12:00:00", // FINAL
-        tmpHorarioAdicionalPratico: 0,
-        tamanhoNavio: undefined,
-        mare: undefined,
-        calado: undefined,
-        tempoAdicional: 0,
-        statusDesatracamento: true,
-        tempoAtracacao: 3,
-        dtHrMarineTraffic: undefined,
-        berco: "BACIA B"
-    },
-    {
-        mavio: "NAVIO C",
-        dtHrChegadaDuv: "2022-07-31 12:00:00",
-        dtHrChegadaPratico: "2022-07-31 12:00:00",
-        dtHrChegada: "2022-07-31 12:00:00", // FINAL
-        tmpHorarioAdicionalPratico: 0,
-        tamanhoNavio: undefined,
-        mare: undefined,
-        calado: undefined,
-        tempoAdicional: 0,
-        statusDesatracamento: true,
-        tempoAtracacao: 3,
-        dtHrMarineTraffic: undefined,
-        berco: "BACIA C"
-    },
-    {
-        mavio: "NAVIO D",
-        dtHrChegadaDuv: "2022-07-31 15:00:00",
-        dtHrChegadaPratico: "2022-07-31 12:00:00",
-        dtHrChegada: "2022-07-31 12:00:00", // FINAL
-        tmpHorarioAdicionalPratico: 0,
-        tamanhoNavio: undefined,
-        mare: undefined,
-        calado: undefined,
-        tempoAdicional: 0,
-        statusDesatracamento: true,
-        tempoAtracacao: 3,
-        dtHrMarineTraffic: undefined,
-        berco: "BACIA D"
-    },    {
-        mavio: "NAVIO E",
-        dtHrChegadaDuv: "2022-07-31 15:00:00",
-        dtHrChegadaPratico: "2022-07-31 12:00:00",
-        dtHrChegada: "2022-07-31 12:00:00", // FINAL
-        tmpHorarioAdicionalPratico: 0,
-        tamanhoNavio: undefined,
-        mare: undefined,
-        calado: undefined,
-        tempoAdicional: 0,
-        statusDesatracamento: true,
-        tempoAtracacao: 3,
-        dtHrMarineTraffic: undefined,
-        berco: "BACIA E"
-    },
-    {
-        mavio: "NAVIO F",
-        dtHrChegadaDuv: "2022-07-31 17:00:00",
-        dtHrChegadaPratico: "2022-07-31 12:00:00",
-        dtHrChegada: "2022-07-31 12:00:00", // FINAL
-        tmpHorarioAdicionalPratico: 0,
-        tamanhoNavio: undefined,
-        mare: undefined,
-        calado: undefined,
-        tempoAdicional: 0,
-        statusDesatracamento: true,
-        tempoAtracacao: 3,
-        dtHrMarineTraffic: undefined,
-        berco: "BACIA F"
-    },
-];
+
+const { horarios } = require('./horarios.js')
+
+// A consulta de APIs da PSP foi realizada através da planilha disponibilizada por eles mesmos; PSP = Porto sem Papel
+const { anuencias } = require('./anuencias.js')
+
+for (let horario of horarios) {
+    for (let anuencia of anuencias) {
+        if (anuencia.duv == horario.duv) {
+            horario.dtHrChegada = addHours(anuencia.hrDiferenca, horario.dtHrChegada)
+        }
+    }
+}
+
+console.log(horarios);
+console.log(anuencias);
+
+function addHours(numOfHours, date = new Date()) {
+    date.setTime(date.getTime() + numOfHours * 60 * 60 * 1000);
+
+    return date;
+}
 
 
 app.get('/', function (req, res) {
@@ -111,6 +42,25 @@ app.get('/horarios', function (req, res) {
         response: horarios
     });
 });
+
+app.get('/horarios/:duv', function (req, res) {
+    var duv = req.params.duv;
+
+    for (let horario of horarios) {
+        if (horario.duv == duv) {
+            res.send({
+                response: horario
+            });
+            return false;
+        }
+    }
+
+    res.send({
+        response: undefined
+    });
+});
+
+const hostname = '127.0.0.1';
 
 http.createServer(app, function (req, res) {
     console.log(`Server running at http://${hostname}:9080/`);
