@@ -1,9 +1,4 @@
-const http = require('http');
-const https = require('https');
-const request = require('request');
 const bodyParser = require('body-parser')
-
-
 
 var express = require('express');
 var app = express();
@@ -25,9 +20,9 @@ const { horarios } = require('./horarios.js')
 const { anuencias } = require('./anuencias.js')
 const { ocorrencias } = require('./ocorrencias.js')
 const { navios } = require('./navios.js')
+const { naviosMarine } = require('./marine.js')
 
 // A consulta de APIs da PSP foi realizada através da planilha disponibilizada por eles mesmos; PSP = Porto sem Papel
-
 
 for (let horario of horarios) {
     for (let anuencia of anuencias) {
@@ -40,6 +35,20 @@ for (let horario of horarios) {
         }
     }
 }
+
+for (let horario of horarios) {
+    for (let navio of naviosMarine) {
+        if (navio.navio == horario.navio) {
+            horario.dtHrChegadaMarine = navio.dtPrevisaoHrChegada;
+
+            if (horario.dtHrChegadaMarine > horario.dtHrChegada) {
+                horario.dtHrChegada = horario.dtHrChegadaMarine;
+                horario.status = "ATRASADO - BY MARINE TRAFFIC"
+            }
+        }
+    }
+}
+
 
 function addHours(numOfHours, date = new Date()) {
     date.setTime(date.getTime() + numOfHours * 60 * 60 * 1000);
@@ -57,8 +66,13 @@ app.get('/', function (req, res) {
 // HORARIOS
 
 app.get('/horarios', function (req, res) {
+    const crescente = horarios.sort(function (a, b) {
+        return  new Date(a.dtHrChegada) - new Date(b.dtHrChegada);
+    });
+
+
     res.send({
-        response: horarios
+        response: crescente
     });
 });
 
@@ -91,7 +105,6 @@ app.post('/ocorrencias', function (req, res) {
     console.log('receiving data ...');
     console.log('body is ', req.body);
 
-
     if (req.body.idOcorrencia != undefined && req.body.idDuv) {
 
         for (let ocorrencia of ocorrencias) {
@@ -110,7 +123,6 @@ app.post('/ocorrencias', function (req, res) {
             }
         }
     }
-
 });
 
 // NAVIOS 
@@ -131,11 +143,31 @@ app.get('/navios', function (req, res) {
     });
 });
 
+// API PSC STATUS
+
+// ATRACADO PORTO  
+// EM ANDAMENTO
+
+app.post('/pcs/status', function (req, res) {
+    console.log('receiving data ...');
+    console.log('body is ', req.body);
+
+    if (req.body.status != undefined && req.body.idDuv) {
 
 
+        for (let horario of horarios) {
+            if (req.body.idDuv == horario.duv) {
+                horario.status = req.body.status
+                horario.dtHrChegada = undefined;
 
+                res.send({
+                    response: "OK"
+                });
+            }
+        }
 
-const hostname = '127.0.0.1';
+    }
+});
 
 var PORT = process.env.PORT || 9080;
 

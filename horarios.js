@@ -1,7 +1,7 @@
 var horarios = [
     {
         duv: 12010,
-        navio: "NAVIO A",
+        navio: "YARA",
         dtHrChegadaDuv: new Date("2022-07-31 12:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 12:00:00"),
         dtHrChegada: new Date("2022-07-31 12:00:00"), // FINAL
@@ -18,7 +18,7 @@ var horarios = [
     },
     {
         duv: 12011,
-        navio: "NAVIO B",
+        navio: "CIC EPOS",
         dtHrChegadaDuv: new Date("2022-07-31 12:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 12:00:00"),
         dtHrChegada: new Date("2022-07-31 12:00:00"), // FINAL
@@ -35,7 +35,7 @@ var horarios = [
     },
     {
         duv: 12012,
-        navio: "NAVIO C",
+        navio: "ZHENG ZHI",
         dtHrChegadaDuv: new Date("2022-07-31 12:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 12:00:00"),
         dtHrChegada: new Date("2022-07-31 12:00:00"), // FINAL
@@ -52,7 +52,7 @@ var horarios = [
     },
     {
         duv: 12013,
-        navio: "NAVIO D",
+        navio: "TIAN SHOU",
         dtHrChegadaDuv: new Date("2022-07-31 15:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 12:00:00"),
         dtHrChegada: new Date("2022-07-31 12:00:00"), // FINAL
@@ -68,10 +68,10 @@ var horarios = [
         status: "EM ANDAMENTO"
     }, {
         duv: 12014,
-        navio: "NAVIO E",
-        dtHrChegadaDuv: new Date("2022-07-31 15:00:00"),
-        dtHrChegadaPratico: new Date("2022-07-31 12:00:00"),
-        dtHrChegada: new Date("2022-07-31 12:00:00"), // FINAL
+        navio: "ANNA SMILE",
+        dtHrChegadaDuv: new Date("2022-07-31 19:00:00"),
+        dtHrChegadaPratico: new Date("2022-07-31 19:00:00"),
+        dtHrChegada: new Date("2022-07-31 19:00:00"), // FINAL
         tmpHorarioAdicionalPratico: 0,
         tamanhoNavio: undefined,
         mare: undefined,
@@ -85,7 +85,7 @@ var horarios = [
     },
     {
         duv: 12015,
-        navio: "NAVIO F",
+        navio: "SERENA",
         dtHrChegadaDuv: new Date("2022-07-31 17:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 12:00:00"),
         dtHrChegada: new Date("2022-07-31 12:00:00"), // FINAL
