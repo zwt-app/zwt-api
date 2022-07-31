@@ -19,6 +19,8 @@
 
 [navios](https://zwt-api.herokuapp.com/navios)  |    ```/navios```  Listagem de Navios
 
+[navios/:duv](https://zwt-api.herokuapp.com/navios/:duv)  |    ```/navios/:duv``` Informações do Navio
+
 ### POST 
 
 [ocorrencias](https://zwt-api.herokuapp.com/ocorrencias)  |   ```/ocorrencias``` Cadastro de ocorrências por Navio
