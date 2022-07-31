@@ -186,10 +186,7 @@ app.get('/navios', function (req, res) {
 // EM ANDAMENTO
 
 app.post('/pcs/status', function (req, res) {
-
     if (req.body.status != undefined && req.body.idDuv) {
-
-
         for (let horario of horarios) {
             if (req.body.idDuv == horario.duv) {
                 horario.status = req.body.status
@@ -198,6 +195,7 @@ app.post('/pcs/status', function (req, res) {
                 res.send({
                     response: "OK"
                 });
+                break;
             }
         }
 

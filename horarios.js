@@ -1,5 +1,39 @@
 var horarios = [
     {
+        duv: 12008,
+        navio: "YARA",
+        dtHrChegadaDuv: new Date("2022-07-30 10:00:00"),
+        dtHrChegadaPratico: new Date("2022-07-30 10:00:00"),
+        dtHrChegada: new Date("2022-07-30 10:00:00"), // FINAL
+        tmpHorarioAdicionalPratico: 0,
+        tamanhoNavio: undefined,
+        mare: undefined,
+        calado: undefined,
+        tempoAdicional: 0,
+        statusDesatracamento: true,
+        tempoAtracacao: 3,
+        dtHrMarineTraffic: undefined,
+        berco: "BERÇO A",
+        status: "CONCLUÍDO"
+    },
+    {
+        duv: 12009,
+        navio: "YARA",
+        dtHrChegadaDuv: new Date("2022-07-30 12:00:00"),
+        dtHrChegadaPratico: new Date("2022-07-30 12:00:00"),
+        dtHrChegada: new Date("2022-07-30 12:00:00"), // FINAL
+        tmpHorarioAdicionalPratico: 0,
+        tamanhoNavio: undefined,
+        mare: undefined,
+        calado: undefined,
+        tempoAdicional: 0,
+        statusDesatracamento: true,
+        tempoAtracacao: 3,
+        dtHrMarineTraffic: undefined,
+        berco: "BERÇO A",
+        status: "CONCLUÍDO"
+    },
+    {
         duv: 12010,
         navio: "YARA",
         dtHrChegadaDuv: new Date("2022-07-31 07:00:00"),
