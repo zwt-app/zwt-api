@@ -76,10 +76,10 @@ app.get('/', function (req, res) {
 
 app.get('/horarios', function (req, res) {
     const crescente = horarios.sort(function (a, b) {
-        if (a.dtHrChegada != undefined && b.dtHrChegada != undefined) {
+        if (a.dtHrChegada !== undefined && b.dtHrChegada !== undefined) {
             return new Date(a.dtHrChegada) - new Date(b.dtHrChegada);
         } else {
-            return 10000 * 100000 * 10000;
+            return 8640000000000000;
         }
     });
 
