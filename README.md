@@ -1,5 +1,10 @@
 # zwt-api
 
+## install and run
+
+ ``` npm install ``` & ``` npm start ```
+
+
 ## APIs 
 
 ### GET 
