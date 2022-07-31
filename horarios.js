@@ -1,7 +1,7 @@
 var horarios = [
     {
         duv: 12010,
-        mavio: "NAVIO A",
+        navio: "NAVIO A",
         dtHrChegadaDuv: new Date("2022-07-31 12:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 12:00:00"),
         dtHrChegada: new Date("2022-07-31 12:00:00"), // FINAL
@@ -13,11 +13,12 @@ var horarios = [
         statusDesatracamento: true,
         tempoAtracacao: 3,
         dtHrMarineTraffic: undefined,
-        berco: "BACIA A"
+        berco: "BACIA A",
+        status: "EM ANDAMENTO"
     },
     {
         duv: 12011,
-        mavio: "NAVIO B",
+        navio: "NAVIO B",
         dtHrChegadaDuv: new Date("2022-07-31 12:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 12:00:00"),
         dtHrChegada: new Date("2022-07-31 12:00:00"), // FINAL
@@ -29,11 +30,12 @@ var horarios = [
         statusDesatracamento: true,
         tempoAtracacao: 3,
         dtHrMarineTraffic: undefined,
-        berco: "BACIA B"
+        berco: "BACIA B",
+        status: "EM ANDAMENTO"
     },
     {
         duv: 12012,
-        mavio: "NAVIO C",
+        navio: "NAVIO C",
         dtHrChegadaDuv: new Date("2022-07-31 12:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 12:00:00"),
         dtHrChegada: new Date("2022-07-31 12:00:00"), // FINAL
@@ -45,11 +47,12 @@ var horarios = [
         statusDesatracamento: true,
         tempoAtracacao: 3,
         dtHrMarineTraffic: undefined,
-        berco: "BACIA C"
+        berco: "BACIA C",
+        status: "EM ANDAMENTO"
     },
     {
         duv: 12013,
-        mavio: "NAVIO D",
+        navio: "NAVIO D",
         dtHrChegadaDuv: new Date("2022-07-31 15:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 12:00:00"),
         dtHrChegada: new Date("2022-07-31 12:00:00"), // FINAL
@@ -61,10 +64,11 @@ var horarios = [
         statusDesatracamento: true,
         tempoAtracacao: 3,
         dtHrMarineTraffic: undefined,
-        berco: "BACIA D"
+        berco: "BACIA D",
+        status: "EM ANDAMENTO"
     }, {
         duv: 12014,
-        mavio: "NAVIO E",
+        navio: "NAVIO E",
         dtHrChegadaDuv: new Date("2022-07-31 15:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 12:00:00"),
         dtHrChegada: new Date("2022-07-31 12:00:00"), // FINAL
@@ -76,11 +80,12 @@ var horarios = [
         statusDesatracamento: true,
         tempoAtracacao: 3,
         dtHrMarineTraffic: undefined,
-        berco: "BACIA E"
+        berco: "BACIA E",
+        status: "EM ANDAMENTO"
     },
     {
         duv: 12015,
-        mavio: "NAVIO F",
+        navio: "NAVIO F",
         dtHrChegadaDuv: new Date("2022-07-31 17:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 12:00:00"),
         dtHrChegada: new Date("2022-07-31 12:00:00"), // FINAL
@@ -92,7 +97,8 @@ var horarios = [
         statusDesatracamento: true,
         tempoAtracacao: 3,
         dtHrMarineTraffic: undefined,
-        berco: "BACIA F"
+        berco: "BACIA F",
+        status: "EM ANDAMENTO"
     },
 ];
 

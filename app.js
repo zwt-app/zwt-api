@@ -16,20 +16,24 @@ app.all('/*', function (req, res, next) {
 
 
 const { horarios } = require('./horarios.js')
+const { anuencias } = require('./anuencias.js')
+const { ocorrencias } = require('./ocorrencias.js')
+const { navios } = require('./navios.js')
 
 // A consulta de APIs da PSP foi realizada através da planilha disponibilizada por eles mesmos; PSP = Porto sem Papel
-const { anuencias } = require('./anuencias.js')
+
 
 for (let horario of horarios) {
     for (let anuencia of anuencias) {
         if (anuencia.duv == horario.duv) {
             horario.dtHrChegada = addHours(anuencia.hrDiferenca, horario.dtHrChegada)
+
+            if (horario.dtHrChegada != horario.dtHrChegadaDuv) {
+                horario.status = "ATRASADO"
+            }
         }
     }
 }
-
-console.log(horarios);
-console.log(anuencias);
 
 function addHours(numOfHours, date = new Date()) {
     date.setTime(date.getTime() + numOfHours * 60 * 60 * 1000);
@@ -44,6 +48,7 @@ app.get('/', function (req, res) {
     });
 });
 
+// HORARIOS
 
 app.get('/horarios', function (req, res) {
     res.send({
@@ -68,20 +73,50 @@ app.get('/horarios/:duv', function (req, res) {
     });
 });
 
+// OCORRENCIAS
+
+app.get('/ocorrencias', function (req, res) {
+    res.send({
+        response: ocorrencias
+    });
+});
+
+app.post('/ocorrencias', function (req, res) {
+    console.log('receiving data ...');
+    console.log('body is ', req.body);
+    //res.send(req.body);
+
+    //req.body.id
+
+});
+
+// NAVIOS 
+
+app.get('/navios', function (req, res) {
+
+    for (let horario of horarios) {
+        for (let navio of navios) {
+            if (horario.duv == navio.duv) {
+                navio.status = horario.status;
+                navio.name = horario.navio;
+            }
+        }
+    }
+
+    res.send({
+        response: navios
+    });
+});
+
+
+
+
+
 const hostname = '127.0.0.1';
 
-
-// http.createServer(app, function (req, res) {
-//     console.log(`Server running at http://${hostname}:9080/`);
-// }).listen(process.env.PORT || 9080);
-
-// https.createServer(app, function (req, res) {
-//     console.log(`Server running at http://${hostname}:9443/`);
-// }).listen(9443);
-
 var PORT = process.env.PORT || 9080;
- 
-app.listen(PORT, function(err){
+
+app.listen(PORT, function (err) {
     if (err) console.log("Error in server setup")
     console.log("Server listening on Port", PORT);
 })
