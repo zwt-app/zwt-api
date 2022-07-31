@@ -121,9 +121,6 @@ app.post('/ocorrencias', function (req, res) {
                     if (horario.tempoAdicional == undefined)
                         horario.tempoAdicional = 0;
 
-
-
-
                     horario.tempoAdicional += ocorrencia.hrIncrementa;
 
                     if (horario.dtHrChegada != horario.dtHrChegadaDuv) {
@@ -131,29 +128,34 @@ app.post('/ocorrencias', function (req, res) {
                     }
 
                     for (let horarioNavio of horarios) {
-                        if (horarioNavio.dtHrChegada < horario.dtHrChegada && horarioNavio.berco == horario.berco) {
+                        if (horarioNavio.dtHrChegada < horario.dtHrChegada && horarioNavio.berco === horario.berco) {
                             const horariosDecrescente = horarios.sort(function (a, b) {
                                 return new Date(b.dtHrChegada) - new Date(a.dtHrChegada);
                             });
 
-                            horariosDecrescenteBerco = [];
+                            horariosDecrescenteBerco = {};
 
                             for (let horarioDec of horariosDecrescente) {
                                 if (horarioDec.berco == horarioNavio.berco) {
-                                    horariosDecrescenteBerco.push(horarioDec);
+                                    horariosDecrescenteBerco = horarioDec;
                                     break;
                                 }
                             }
 
-                            horario.dtHrChegada = addHours(horariosDecrescenteBerco.tempoAtracacao, horariosDecrescenteBerco.dtHrChegada);
+                            horario.tempoAtracacao = horariosDecrescenteBerco.tempoAtracacao
+                            horario.dtHrChegada = new Date(horariosDecrescenteBerco.dtHrChegada)
+
+                            horario.dtHrChegada = addHours(horario.tempoAtracacao, horario.dtHrChegada);
                             horario.tempoEsperaBarra = (horario.dtHrChegada - horario.dtHrChegadaDuv) / 3600 / 1000;
-                            horario.status = "FIM DA FILA";
+                            horario.status = "REALOCADO";
+                            break;
                         }
                     }
 
                     res.send({
                         response: "OK"
                     });
+                    break;
                 }
             }
         }
