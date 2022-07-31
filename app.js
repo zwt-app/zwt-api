@@ -27,7 +27,16 @@ const { naviosMarine } = require('./marine.js')
 for (let horario of horarios) {
     for (let anuencia of anuencias) {
         if (anuencia.duv == horario.duv) {
+            horario.agenteMaritimo = anuencia.agenteMaritimo;
+
             horario.dtHrChegada = addHours(anuencia.hrDiferenca, horario.dtHrChegada)
+
+            if (horario.tempoAdicional == undefined)
+                horario.tempoAdicional = 0;
+
+            if (anuencia.hrDiferenca != undefined) {
+                horario.tempoAdicional += anuencia.hrDiferenca;
+            }
 
             if (horario.dtHrChegada != horario.dtHrChegadaDuv) {
                 horario.status = "ATRASADO"
@@ -67,9 +76,8 @@ app.get('/', function (req, res) {
 
 app.get('/horarios', function (req, res) {
     const crescente = horarios.sort(function (a, b) {
-        return  new Date(a.dtHrChegada) - new Date(b.dtHrChegada);
+        return new Date(a.dtHrChegada) - new Date(b.dtHrChegada);
     });
-
 
     res.send({
         response: crescente
@@ -102,8 +110,6 @@ app.get('/ocorrencias', function (req, res) {
 });
 
 app.post('/ocorrencias', function (req, res) {
-    console.log('receiving data ...');
-    console.log('body is ', req.body);
 
     if (req.body.idOcorrencia != undefined && req.body.idDuv) {
 
@@ -112,8 +118,37 @@ app.post('/ocorrencias', function (req, res) {
                 if (req.body.idOcorrencia == ocorrencia.id && req.body.idDuv == horario.duv) {
                     horario.dtHrChegada = addHours(ocorrencia.hrIncrementa, horario.dtHrChegada)
 
+                    if (horario.tempoAdicional == undefined)
+                        horario.tempoAdicional = 0;
+
+
+
+
+                    horario.tempoAdicional += ocorrencia.hrIncrementa;
+
                     if (horario.dtHrChegada != horario.dtHrChegadaDuv) {
                         horario.status = "ATRASADO"
+                    }
+
+                    for (let horarioNavio of horarios) {
+                        if (horarioNavio.dtHrChegada < horario.dtHrChegada && horarioNavio.berco == horario.berco) {
+                            const horariosDecrescente = horarios.sort(function (a, b) {
+                                return new Date(b.dtHrChegada) - new Date(a.dtHrChegada);
+                            });
+
+                            horariosDecrescenteBerco = [];
+
+                            for (let horarioDec of horariosDecrescente) {
+                                if (horarioDec.berco == horarioNavio.berco) {
+                                    horariosDecrescenteBerco.push(horarioDec);
+                                    break;
+                                }
+                            }
+
+                            horario.dtHrChegada = addHours(horariosDecrescenteBerco.tempoAtracacao, horariosDecrescenteBerco.dtHrChegada);
+                            horario.tempoEsperaBarra = (horario.dtHrChegada - horario.dtHrChegadaDuv) / 3600 / 1000;
+                            horario.status = "FIM DA FILA";
+                        }
                     }
 
                     res.send({
@@ -149,8 +184,6 @@ app.get('/navios', function (req, res) {
 // EM ANDAMENTO
 
 app.post('/pcs/status', function (req, res) {
-    console.log('receiving data ...');
-    console.log('body is ', req.body);
 
     if (req.body.status != undefined && req.body.idDuv) {
 

@@ -9,8 +9,6 @@ const sheets = file.SheetNames
 let anuencias = [];
 
 for (let i = 0; i < sheets.length; i++) {
-
-
     if (sheets[i] == "tb_anuencias") {
         const temp = reader.utils.sheet_to_json(
             file.Sheets[file.SheetNames[i]])
@@ -24,6 +22,22 @@ for (let i = 0; i < sheets.length; i++) {
 
             anuencias.push(anuencia);
 
+        })
+    }
+}
+
+const { horarios } = require('./horarios.js')
+
+for (let i = 0; i < sheets.length; i++) {
+    if (sheets[i] == "tb_agente_maritimo") {
+        const temp = reader.utils.sheet_to_json(
+            file.Sheets[file.SheetNames[i]])
+        temp.forEach((res) => {
+            for (let horario of horarios) {
+                if (horario.duv == res.agma_duv_nr) {
+                    horario.agenteMaritimo = res.agma_nm;
+                }
+            }
         })
     }
 }
