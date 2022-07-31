@@ -50,7 +50,7 @@ for (let horario of horarios) {
         if (navio.navio == horario.navio) {
             horario.dtHrChegadaMarine = navio.dtPrevisaoHrChegada;
 
-            if (horario.dtHrChegadaMarine > horario.dtHrChegada) {
+            if (horario.dtHrChegadaMarine > horario.dtHrChegada && horario.status != "CONCLUÍDO") {
                 horario.dtHrChegada = horario.dtHrChegadaMarine;
                 horario.status = "ATRASADO - BY MARINE TRAFFIC"
             }
@@ -128,7 +128,7 @@ app.post('/ocorrencias', function (req, res) {
                     }
 
                     for (let horarioNavio of horarios) {
-                        if (horarioNavio.dtHrChegada < horario.dtHrChegada && horarioNavio.berco === horario.berco) {
+                        if (horarioNavio.dtHrChegada < horario.dtHrChegada && horarioNavio.berco === horario.berco && horario.status != "CONCLUÍDO") {
                             const horariosDecrescente = horarios.sort(function (a, b) {
                                 return new Date(b.dtHrChegada) - new Date(a.dtHrChegada);
                             });
@@ -177,6 +177,32 @@ app.get('/navios', function (req, res) {
 
     res.send({
         response: navios
+    });
+});
+
+app.get('/navios/:duv', function (req, res) {
+    var duv = req.params.duv;
+
+    for (let horario of horarios) {
+        for (let navio of navios) {
+            if (horario.duv == navio.duv) {
+                navio.status = horario.status;
+                navio.name = horario.navio;
+            }
+        }
+    }
+
+    for (let navio of navios) {
+        if (navio.duv == duv) {
+            res.send({
+                response: navio
+            });
+            return false;
+        }
+    }
+
+    res.send({
+        response: undefined
     });
 });
 

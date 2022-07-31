@@ -1,7 +1,7 @@
 var horarios = [
     {
         duv: 12008,
-        navio: "YARA",
+        navio: "ZEA",
         dtHrChegadaDuv: new Date("2022-07-30 10:00:00"),
         dtHrChegadaPratico: new Date("2022-07-30 10:00:00"),
         dtHrChegada: new Date("2022-07-30 10:00:00"), // FINAL
@@ -18,7 +18,7 @@ var horarios = [
     },
     {
         duv: 12009,
-        navio: "YARA",
+        navio: "THE STRONG",
         dtHrChegadaDuv: new Date("2022-07-30 12:00:00"),
         dtHrChegadaPratico: new Date("2022-07-30 12:00:00"),
         dtHrChegada: new Date("2022-07-30 12:00:00"), // FINAL
