@@ -6,6 +6,13 @@ var express = require('express');
 var app = express();
 const cors = require('cors');
 
+app.use(cors());
+
+app.all('/*', function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
 
 
 const { horarios } = require('./horarios.js')
@@ -63,22 +70,18 @@ app.get('/horarios/:duv', function (req, res) {
 
 const hostname = '127.0.0.1';
 
-app.use(cors());
 
-http.createServer(app, function (req, res) {
-    console.log(`Server running at http://${hostname}:9080/`);
-    res.header("Access-Control-Allow-Origin", "*");
-    //Quais são os métodos que a conexão pode realizar na API
-    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
-    
-    next();
-}).listen(process.env.PORT || 9080);
+// http.createServer(app, function (req, res) {
+//     console.log(`Server running at http://${hostname}:9080/`);
+// }).listen(process.env.PORT || 9080);
 
-https.createServer(app, function (req, res) {
-    console.log(`Server running at http://${hostname}:9443/`);
-    res.header("Access-Control-Allow-Origin", "*");
-    //Quais são os métodos que a conexão pode realizar na API
-    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
-    
-    next();
-}).listen(9443);
+// https.createServer(app, function (req, res) {
+//     console.log(`Server running at http://${hostname}:9443/`);
+// }).listen(9443);
+
+var PORT = 9080;
+ 
+app.listen(PORT, function(err){
+    if (err) console.log("Error in server setup")
+    console.log("Server listening on Port", PORT);
+})
