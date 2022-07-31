@@ -21,6 +21,7 @@ const { anuencias } = require('./anuencias.js')
 const { ocorrencias } = require('./ocorrencias.js')
 const { navios } = require('./navios.js')
 const { naviosMarine } = require('./marine.js')
+const { naviosANTAQ } = require('./antaq.js')
 
 // A consulta de APIs da PSP foi realizada através da planilha disponibilizada por eles mesmos; PSP = Porto sem Papel
 
@@ -115,6 +116,8 @@ app.get('/ocorrencias', function (req, res) {
 
 app.post('/ocorrencias', function (req, res) {
 
+    var dtHrModificada = undefined;
+
     if (req.body.idOcorrencia != undefined && req.body.idDuv) {
 
         for (let ocorrencia of ocorrencias) {
@@ -130,6 +133,8 @@ app.post('/ocorrencias', function (req, res) {
                     if (horario.dtHrChegada != horario.dtHrChegadaDuv) {
                         horario.status = "ATRASADO"
                     }
+
+                    dtHrModificada = horario.dtHrChegada
 
                     for (let horarioNavio of horarios) {
                         if (horarioNavio.dtHrChegada < horario.dtHrChegada && horarioNavio.berco === horario.berco && horario.status != "CONCLUÍDO") {
@@ -152,18 +157,38 @@ app.post('/ocorrencias', function (req, res) {
                             horario.dtHrChegada = addHours(horario.tempoAtracacao, horario.dtHrChegada);
                             horario.tempoEsperaBarra = (horario.dtHrChegada - horario.dtHrChegadaDuv) / 3600 / 1000;
                             horario.status = "REALOCADO";
+
+                            dtHrModificada = horario.dtHrChegada;
+
                             break;
                         }
                     }
 
-                    res.send({
-                        response: "OK"
-                    });
+
+
                     break;
                 }
             }
         }
     }
+
+    if (dtHrModificada != undefined) {
+        for (let horario of horarios) {
+            if (horario.dtHrChegada < dtHrModificada) {
+                horario.statusTime = "UP";
+            } else {
+                horario.statusTime = "DOWN";
+            }
+
+            if (horario.status == "CONCLUÍDO") {
+                horario.statusTime = "";
+            }
+        }
+    }
+
+    res.send({
+        response: "OK"
+    });
 });
 
 // NAVIOS 

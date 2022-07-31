@@ -1,7 +1,7 @@
 var horarios = [
     {
         duv: 12008,
-        navio: "ZEA",
+        navio: "MAERSK VENTURE",
         dtHrChegadaDuv: new Date("2022-07-30 10:00:00"),
         dtHrChegadaPratico: new Date("2022-07-30 10:00:00"),
         dtHrChegada: new Date("2022-07-30 10:00:00"), // FINAL
@@ -18,7 +18,7 @@ var horarios = [
     },
     {
         duv: 12009,
-        navio: "THE STRONG",
+        navio: "MSC ALICANTE",
         dtHrChegadaDuv: new Date("2022-07-30 12:00:00"),
         dtHrChegadaPratico: new Date("2022-07-30 12:00:00"),
         dtHrChegada: new Date("2022-07-30 12:00:00"), // FINAL
@@ -35,7 +35,7 @@ var horarios = [
     },
     {
         duv: 12010,
-        navio: "YARA",
+        navio: "NORMAND MARINER",
         dtHrChegadaDuv: new Date("2022-07-31 07:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 07:00:00"),
         dtHrChegada: new Date("2022-07-31 07:00:00"), // FINAL
@@ -52,7 +52,7 @@ var horarios = [
     },
     {
         duv: 12011,
-        navio: "CIC EPOS",
+        navio: "SANTA VICTORIA",
         dtHrChegadaDuv: new Date("2022-07-31 09:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 09:00:00"),
         dtHrChegada: new Date("2022-07-31 09:00:00"), // FINAL
@@ -69,7 +69,7 @@ var horarios = [
     },
     {
         duv: 12012,
-        navio: "ZHENG ZHI",
+        navio: "MAERSK LIMA",
         dtHrChegadaDuv: new Date("2022-07-31 10:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 10:00:00"),
         dtHrChegada: new Date("2022-07-31 10:00:00"), // FINAL
@@ -86,7 +86,7 @@ var horarios = [
     },
     {
         duv: 12013,
-        navio: "TIAN SHOU",
+        navio: "BOW OCEANIC",
         dtHrChegadaDuv: new Date("2022-07-31 12:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 12:00:00"),
         dtHrChegada: new Date("2022-07-31 12:00:00"), // FINAL
@@ -119,7 +119,7 @@ var horarios = [
     },
     {
         duv: 12015,
-        navio: "SERENA",
+        navio: "OVERSEAS MILOS",
         dtHrChegadaDuv: new Date("2022-07-31 18:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 18:00:00"),
         dtHrChegada: new Date("2022-07-31 18:00:00"), // FINAL
@@ -153,7 +153,7 @@ var horarios = [
     },
     {
         duv: 12017,
-        navio: "HALOPHYLA",
+        navio: "NEDLLOYD HONSHU",
         dtHrChegadaDuv: new Date("2022-07-31 20:00:00"),
         dtHrChegadaPratico: new Date("2022-07-31 20:00:00"),
         dtHrChegada: new Date("2022-07-31 20:00:00"), // FINAL
