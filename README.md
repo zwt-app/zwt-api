@@ -24,8 +24,8 @@
 [horarios](https://zwt-api.herokuapp.com/ocorrencias)  |   ```/ocorrencias``` Cadastro de ocorrências por Navio
 ```
   {
-      "idOcorrencia": 1,
-      "idDuv": 12011
+      "idOcorrencia": 0, // 1
+      "idDuv": 0 // 12011
   }
 ```
 
@@ -34,8 +34,8 @@
 
 ```
   {
-      "status": "ATRACADO PORTO",
-      "idDuv": 12010
+      "status": "", // ATRACADO PORTO
+      "idDuv": 0 // 12010
   }
 ```
 
