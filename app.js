@@ -27,7 +27,7 @@ const { naviosMarine } = require('./marine.js')
 for (let horario of horarios) {
     for (let anuencia of anuencias) {
         if (anuencia.duv == horario.duv) {
-            horario.agenteMaritimo = anuencia.agenteMaritimo;
+            //horario.agenteMaritimo = anuencia.agenteMaritimo;
 
             horario.dtHrChegada = addHours(anuencia.hrDiferenca, horario.dtHrChegada)
 
