@@ -1,12 +1,18 @@
 const http = require('http');
 const https = require('https');
 const request = require('request');
+const bodyParser = require('body-parser')
+
+
 
 var express = require('express');
 var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 const cors = require('cors');
 
 app.use(cors());
+
 
 app.all('/*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -84,9 +90,26 @@ app.get('/ocorrencias', function (req, res) {
 app.post('/ocorrencias', function (req, res) {
     console.log('receiving data ...');
     console.log('body is ', req.body);
-    //res.send(req.body);
 
-    //req.body.id
+
+    if (req.body.idOcorrencia != undefined && req.body.idDuv) {
+
+        for (let ocorrencia of ocorrencias) {
+            for (let horario of horarios) {
+                if (req.body.idOcorrencia == ocorrencia.id && req.body.idDuv == horario.duv) {
+                    horario.dtHrChegada = addHours(ocorrencia.hrIncrementa, horario.dtHrChegada)
+
+                    if (horario.dtHrChegada != horario.dtHrChegadaDuv) {
+                        horario.status = "ATRASADO"
+                    }
+
+                    res.send({
+                        response: "OK"
+                    });
+                }
+            }
+        }
+    }
 
 });
 
