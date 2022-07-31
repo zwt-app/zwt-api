@@ -100,6 +100,40 @@ var horarios = [
         berco: "BERÇO B",
         status: "EM ANDAMENTO"
     },
+    {
+        duv: 12016,
+        navio: "MINOAN SKY",
+        dtHrChegadaDuv: new Date("2022-07-31 20:00:00"),
+        dtHrChegadaPratico: new Date("2022-07-31 20:00:00"),
+        dtHrChegada: new Date("2022-07-31 20:00:00"), // FINAL
+        tmpHorarioAdicionalPratico: 0,
+        tamanhoNavio: undefined,
+        mare: undefined,
+        calado: undefined,
+        tempoAdicional: 0,
+        statusDesatracamento: true,
+        tempoAtracacao: 3,
+        dtHrMarineTraffic: undefined,
+        berco: "BERÇO B",
+        status: "EM ANDAMENTO"
+    },
+    {
+        duv: 12017,
+        navio: "HALOPHYLA",
+        dtHrChegadaDuv: new Date("2022-07-31 20:00:00"),
+        dtHrChegadaPratico: new Date("2022-07-31 20:00:00"),
+        dtHrChegada: new Date("2022-07-31 20:00:00"), // FINAL
+        tmpHorarioAdicionalPratico: 0,
+        tamanhoNavio: undefined,
+        mare: undefined,
+        calado: undefined,
+        tempoAdicional: 0,
+        statusDesatracamento: true,
+        tempoAtracacao: 3,
+        dtHrMarineTraffic: undefined,
+        berco: "BERÇO B",
+        status: "EM ANDAMENTO"
+    },
 ];
 
 module.exports = { horarios };
