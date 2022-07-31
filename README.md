@@ -9,19 +9,19 @@
 
 ### GET 
 
-[horarios](https://zwt-api.herokuapp.com/)  |    ```/``` -> health check
+[/](https://zwt-api.herokuapp.com/)  |    ```/``` -> health check
 
 [horarios](https://zwt-api.herokuapp.com/horarios)  |    ```/horarios```  Listagem de Horários de Navios - Listagem Principal
 
-[horarios](https://zwt-api.herokuapp.com/horarios/:duv)  |    ```/horarios/:duv``` Horário de Navio 
+[horarios/:duv](https://zwt-api.herokuapp.com/horarios/:duv)  |    ```/horarios/:duv``` Horário de Navio 
 
-[horarios](https://zwt-api.herokuapp.com/ocorrencias)  |    ```/ocorrencias```  Listagem de Ocorrências 
+[ocorrencias](https://zwt-api.herokuapp.com/ocorrencias)  |    ```/ocorrencias```  Listagem de Ocorrências 
 
-[horarios](https://zwt-api.herokuapp.com/navios)  |    ```/navios```  Listagem de Navios
+[navios](https://zwt-api.herokuapp.com/navios)  |    ```/navios```  Listagem de Navios
 
 ### POST 
 
-[horarios](https://zwt-api.herokuapp.com/ocorrencias)  |   ```/ocorrencias``` Cadastro de ocorrências por Navio
+[ocorrencias](https://zwt-api.herokuapp.com/ocorrencias)  |   ```/ocorrencias``` Cadastro de ocorrências por Navio
 ```
   {
       "idOcorrencia": 0, // 1
@@ -30,7 +30,7 @@
 ```
 
 
-[horarios](https://zwt-api.herokuapp.com/pcs/status)  |   ```/pcs/status```  API para conexão entre portos 
+[pcs/status](https://zwt-api.herokuapp.com/pcs/status)  |   ```/pcs/status```  API para conexão entre portos 
 
 ```
   {
